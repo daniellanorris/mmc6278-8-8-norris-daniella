@@ -2,6 +2,7 @@ const { Post, Tag } = require('../models');
 const { post } = require('../models/Comment');
 
 async function create(req, res, next) {
+  try {
     const { title, body, tags } = req.body
     if (!title || !body) {
       return res.status(400).send('need body and title, sorry')
@@ -12,6 +13,10 @@ async function create(req, res, next) {
       tags:tags
     });
     res.status(200).json(post)
+  }
+  catch(err) {
+    console.log(err)
+  }
 }
 
 // TODO: create a new post
